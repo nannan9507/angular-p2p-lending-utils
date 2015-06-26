@@ -1,0 +1,21 @@
+{
+  "name": "angular-p2p-lending-utils",
+  "version": "0.1.0",
+  "main": "./angular-p2p-lending-utils.js",
+  "homepage": "https://github.com/PeachScript/angular-p2p-lending-utils",
+  "authors": [
+    "Peach <scdzwyxst@gmail.com>"
+  ],
+  "description": "A utils for peer2peer lending base AngularJS",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.2.28"
+  }
+}
