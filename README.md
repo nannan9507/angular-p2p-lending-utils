@@ -3,17 +3,21 @@ A utils for peer2peer lending base AngularJS
 
 # Install
 
-```
+```js
 
 bower install angular-p2p-lending-utils --save
 
 ```
 
-# Import into your project
+# Usage
 
-```
+```js
 
-angular.module('yourApp', ['ngP2PLendingUtils']);
+angular.module('yourApp', ['ngP2PLendingUtils'])
+    // DI
+    .controller('TestController', ['interestCalc', function(interestCalc){
+        // ...
+    }]);
 
 ```
 
@@ -23,11 +27,19 @@ angular.module('yourApp', ['ngP2PLendingUtils']);
 
 Calculate interest by amount, rate(unit: year), time limit(unit: month), lending way, reward(unit: year).
 
-Usage:
+```js
+
+interestCalc(1000, 12, 12, 'average_captial_plus_interest'[, 0.1]); // principal, rate, time limit, lending way, reward(optional)
 
 ```
 
-interestCalc(1000, 12, 12, 'average_captial_plus_interest'); // capital, rate, time limit, lending way
+## repaymentPlanCalc
+
+Calculate repayment plan by amount, rate(unit: year), time limit(unit: month), lending way, reward(unit: year).
+
+```js
+
+repaymentPlanCalc(1000, 12, 12, 'average_captial_plus_interest'); // principal, rate, time limit, lending way
 
 ```
 
