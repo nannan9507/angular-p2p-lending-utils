@@ -228,18 +228,17 @@
       // prevent like this 00001.01
       input = input * 1 + '';
 
-      // solve 0
+      // solve 0 and big number
       if(input == 0){
         return '人民币零元整';
+      }else if(input.split('.')[0].length > 12){
+        return '数字太大！';
       }
 
       var hasDec = input.split('.')[1],
           unitStart = 2,
-          results = hasDec?[]: ['整'];
-
-      // forbidden too big number
-      if(input.split('.')[0].length > 12)
-        return '数字太大！';
+          minus = input.indexOf('-') > -1?'负': '',
+          results = hasDec?'': '整';
 
       // convert to string and reverse
       input = input.split('').reverse().join('');
@@ -255,12 +254,10 @@
 
       // replace number and add unit
       for(var i = 0;i<input.length;i++){
-        results.unshift(uUnits[unitStart + i]);
-        results.unshift(uNums[input[i]]);
+        results = uUnits[unitStart + i] + results;
+        results = uNums[input[i]] + results;
       }
 
-      // replace useless number and unit
-      results = results.join('');
       // remove useless unit
       results = results.replace(/零[拾佰仟角分]/g, '零');
       // remove repeat zero
@@ -272,7 +269,7 @@
       // remove the first 元
       results = results.replace(/^元[零]?/, '');
 
-      return '人民币' + results;
+      return '人民币' + minus + results;
     }
   })
 })(window, window.angular);
