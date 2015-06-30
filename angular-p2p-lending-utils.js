@@ -98,7 +98,7 @@
    * @author    Peach<scdzwyxst@gmail.com>
    * @params    amount, rate(unit: year), time limit(unit: month)
    *            , lending way
-   * @return    interest
+   * @return    plan(Array)
    */
   ngP2PModule.factory('repaymentPlanCalc', function () {
 
@@ -202,5 +202,77 @@
       return handler(amount, rate, time);
     }
   });
-    
+  
+  /**
+   * filter part
+   */
+
+
+  /**
+   * uppercase money use Chinese
+   * 
+   * @date      2015-06-26
+   * @author    Peach<scdzwyxst@gmail.com>
+   * @params    amount(Number)
+   * @return    upppercase amount(String)
+   */
+  
+  ngP2PModule.filter('uppercaseAmount', function () {
+    var uNums = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'],
+        uUnits = ['分', '角', '元', '拾', '佰', '仟', '万', '拾', '佰', '仟', '亿', '拾', '佰', '仟'];
+
+    return function (input) {
+      if(input == '' || isNaN(input * 1))
+        return undefined;
+
+      // prevent like this 00001.01
+      input = input * 1 + '';
+
+      // solve 0
+      if(input == 0){
+        return '人民币零元整';
+      }
+
+      var hasDec = input.split('.')[1],
+          unitStart = 2,
+          results = hasDec?[]: ['整'];
+
+      // forbidden too big number
+      if(input.split('.')[0].length > 12)
+        return '数字太大！';
+
+      // convert to string and reverse
+      input = input.split('').reverse().join('');
+
+      // reset precision
+      input = input.substring(hasDec?hasDec.length - 2:0);
+      if(hasDec){
+        unitStart = 2 - input.split('.')[0].length;
+      }
+
+      // remove dot
+      input = input.replace('.', '');
+
+      // replace number and add unit
+      for(var i = 0;i<input.length;i++){
+        results.unshift(uUnits[unitStart + i]);
+        results.unshift(uNums[input[i]]);
+      }
+
+      // replace useless number and unit
+      results = results.join('');
+      // remove useless unit
+      results = results.replace(/零[拾佰仟角分]/g, '零');
+      // remove repeat zero
+      results = results.replace(/零[零]+/g, '零');
+      // reset zero unit
+      results = results.replace(/零亿/g, '亿');
+      results = results.replace(/零万/g, '万');
+      results = results.replace(/零元/g, '元');
+      // remove the first 元
+      results = results.replace(/^元[零]?/, '');
+
+      return '人民币' + results;
+    }
+  })
 })(window, window.angular);
