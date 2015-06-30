@@ -43,6 +43,16 @@ repaymentPlanCalc(1000, 12, 12, 'average_captial_plus_interest'); // principal, 
 
 ```
 
+# Filter part
+
+## uppercaseAmount
+
+```html
+
+<span ng-bind="13002.12 | uppercaseAmount"></span>
+// output 人民币壹万叁仟零贰元壹角贰分
+```
+
 #MIT license
 The MIT License (MIT)
 
