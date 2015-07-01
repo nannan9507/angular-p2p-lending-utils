@@ -221,7 +221,7 @@
     var uNums = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'],
         uUnits = ['分', '角', '元', '拾', '佰', '仟', '万', '拾', '佰', '仟', '亿', '拾', '佰', '仟'];
 
-    return function (input) {
+    return function (input, prefix) {
       if(input == '' || isNaN(input * 1))
         return undefined;
 
@@ -269,7 +269,7 @@
       // remove the first 元
       results = results.replace(/^元[零]?/, '');
 
-      return '人民币' + minus + results;
+      return (prefix || '人民币') + minus + results;
     }
   })
 })(window, window.angular);

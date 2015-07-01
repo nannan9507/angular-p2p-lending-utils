@@ -29,7 +29,8 @@ Calculate interest by amount, rate(unit: year), time limit(unit: month), lending
 
 ```js
 
-interestCalc(1000, 12, 12, 'average_captial_plus_interest'[, 0.1]); // principal, rate, time limit, lending way, reward(optional)
+interestCalc(1000, 12, 12, 'average_captial_plus_interest'[, 0.1]);
+// principal, rate, time limit, lending way, reward(optional)
 
 ```
 
@@ -39,7 +40,8 @@ Calculate repayment plan by amount, rate(unit: year), time limit(unit: month), l
 
 ```js
 
-repaymentPlanCalc(1000, 12, 12, 'average_captial_plus_interest'); // principal, rate, time limit, lending way
+repaymentPlanCalc(1000, 12, 12, 'average_captial_plus_interest');
+// principal, rate, time limit, lending way
 
 ```
 
@@ -51,6 +53,9 @@ repaymentPlanCalc(1000, 12, 12, 'average_captial_plus_interest'); // principal, 
 
 <span ng-bind="13002.12 | uppercaseAmount"></span>
 // output 人民币壹万叁仟零贰元壹角贰分
+
+<span ng-bind="13002.12 | uppercaseAmount: '￥'"></span>
+// output ￥壹万叁仟零贰元壹角贰分
 ```
 
 #MIT license
