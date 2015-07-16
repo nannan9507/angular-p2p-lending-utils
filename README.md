@@ -21,7 +21,7 @@ angular.module('yourApp', ['ngP2PLendingUtils'])
 
 ```
 
-# Service part
+# Service
 
 ## interestCalc
 
@@ -45,17 +45,27 @@ repaymentPlanCalc(1000, 12, 12, 'average_captial_plus_interest');
 
 ```
 
-# Filter part
+# Filter
 
 ## uppercaseAmount
 
 ```html
 
 <span ng-bind="13002.12 | uppercaseAmount"></span>
-// output 人民币壹万叁仟零贰元壹角贰分
+<!-- output 人民币壹万叁仟零贰元壹角贰分 -->
 
 <span ng-bind="13002.12 | uppercaseAmount: '￥'"></span>
-// output ￥壹万叁仟零贰元壹角贰分
+<!-- output ￥壹万叁仟零贰元壹角贰分 -->
+```
+
+# Directive
+
+## p2pInterest
+
+```html
+
+<span p2p-interest p2p-amount="1000" p2p-rate="12" p2p-periods="12" p2p-way="average_captial_plus_interest"[ p2p-reward="1"]></span>
+<!-- output: 76.19 -->
 ```
 
 #MIT license

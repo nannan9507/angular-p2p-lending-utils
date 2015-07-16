@@ -304,7 +304,7 @@
             return console.error('Missing params, cannot calculate interest !');
           }
 
-          iElement.html($filter('currency')(interestCalc(t.p2pAmount, t.p2pRate, t.p2pPeriods, t.p2pWay, t.Reward), ''));
+          iElement.html($filter('currency')(interestCalc(t.p2pAmount, t.p2pRate, t.p2pPeriods, t.p2pWay, t.p2pReward), ''));
         }
       }
     };
