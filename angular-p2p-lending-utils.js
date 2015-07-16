@@ -272,4 +272,41 @@
       return (prefix || '人民币') + minus + results;
     }
   })
+
+  /**
+   * directive part
+   */
+  
+  /**
+   * count down
+   * 
+   * @date      2015-07-16
+   * @author    Peach<scdzwyxst@gmail.com>
+   * @params    amount, rate(unit: year), time limit(unit: month)
+   *            , lending way, reward(unit: year)
+   * @return    interest(Number)
+   */
+  
+  ngP2PModule.directive('p2pInterest', ['interestCalc', '$filter', function (interestCalc, $filter) {
+    return {
+      restrict: 'A',
+      link: function (scope, iElement, iAttrs) {
+        iAttrs.$observe('p2pAmount', calcInterest);
+        iAttrs.$observe('p2pRate', calcInterest);
+        iAttrs.$observe('p2pPeriods', calcInterest);
+        iAttrs.$observe('p2pWay', calcInterest);
+        iAttrs.$observe('p2pReward', calcInterest);
+
+        function calcInterest () {
+          var t = iAttrs,
+              u = angular.isUndefined;
+          if(u(t.p2pAmount) || u(t.p2pRate) || u(t.p2pPeriods) || u(t.p2pWay)){
+            return console.error('Missing params, cannot calculate interest !');
+          }
+
+          iElement.html($filter('currency')(interestCalc(t.p2pAmount, t.p2pRate, t.p2pPeriods, t.p2pWay, t.Reward), ''));
+        }
+      }
+    };
+  }])
 })(window, window.angular);
